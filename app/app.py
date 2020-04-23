@@ -59,7 +59,7 @@ def files():
 
     if request.method == "GET":
         print("getting")
-        folders = os.listdir('./project')
+        folders = os.listdir('project')
         a = {}
 
         for i in folders:
