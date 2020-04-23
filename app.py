@@ -82,7 +82,7 @@ def files():
 
 if __name__ == "__main__":
     context = ('server.crt', 'server.key')
-    app.run(host='127.0.0.1', port=80, ssl_context=context, threaded=False, debug=False)
+    app.run(ssl_context=context, threaded=False, debug=False)
 
 # https://github.com/jasbur/RaspiWiFi
 # that is link to wifi setup thing i use
