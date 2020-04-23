@@ -75,7 +75,7 @@ def files():
         file_path = (base_path / "./project").resolve()
         folders = os.listdir(file_path)
         print(folders)
-        a = {"projects": }
+
         b = {}
 
         for i in folders:
