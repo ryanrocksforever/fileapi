@@ -1,14 +1,9 @@
 # secondrevision
-from flask import request
+
 from flask_api import FlaskAPI
 import sys
 import os
-import importlib
-import json
-import threading
-import csv
-import re
-import subprocess
+
 from flask_cors import CORS
 from flask import Flask, request, abort, jsonify, send_from_directory
 
