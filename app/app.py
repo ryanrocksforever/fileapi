@@ -6,7 +6,7 @@ import os
 
 from flask_cors import CORS
 from flask import Flask, request, abort, jsonify, send_from_directory
-
+from pathlib import Path
 # from OpenSSL import SSL
 # context = SSL.Context(SSL.SSLv23_METHOD)
 # context.use_privatekey_file('server.key')
@@ -19,7 +19,9 @@ global alreadydone
 running = False
 alreadydone = False
 
-sys.path.insert(1, './scripts')
+
+base_path = Path(__file__).parent
+
 
 
 @app.route('/', methods=["GET"])
@@ -40,7 +42,7 @@ def files():
                 print("getting")
                 projdir = "./project/" + jsondata["name"]
                 print("doodoo")
-                return send_from_directory(projdir, "filetorun.py", as_attachment=True)
+                return send_from_directory(projdir, jsondata[name], as_attachment=True)
         except:
             print(jsondata)
             os.mkdir("./project/" + jsondata["name"])
@@ -59,14 +61,18 @@ def files():
 
     if request.method == "GET":
         print("getting")
-        folders = os.listdir('project')
+        file_path = (base_path / "./project").resolve()
+        folders = os.listdir(file_path)
+        print(folders)
         a = {}
 
         for i in folders:
             # num = i[0]
             name = i
-            filesin = os.listdir("./project/" + i)
-            f = open("./project/" + i + "/desc.txt", "r")
+            print(i)
+            projpath = "./project/" + i + "/desc.txt"
+            projdir = (base_path / projpath).resolve()
+            f = open(projdir, "r")
             desciption = f.read()
             f.close()
 
@@ -82,7 +88,7 @@ def files():
 
 if __name__ == "__main__":
     context = ('server.crt', 'server.key')
-    app.run(ssl_context=context, threaded=False, debug=False)
+    app.run(threaded=False, debug=False)
 
 # https://github.com/jasbur/RaspiWiFi
 # that is link to wifi setup thing i use
