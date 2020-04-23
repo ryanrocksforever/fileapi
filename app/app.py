@@ -37,22 +37,33 @@ def files():
 
         print("posting")
         jsondata = request.data
-        try:
-            if jsondata["download"] == "True":
-                print("getting")
-                projdir = "./project/" + jsondata["name"]
-                print("doodoo")
-                return send_from_directory(projdir, jsondata[name], as_attachment=True)
-        except:
+
+        if "True" in jsondata["download"]:
+            projpath = "./project/" + jsondata["name"]
+            projdir = (base_path / projpath).resolve()
+            #projdir = projdir.replace('//', '/')
+            print(projdir)
+            print("getting")
+            #projdir = "./project/" + jsondata["name"]
+            print("doodoo")
+            name = jsondata["name"] + ".py"
+            return send_from_directory(projdir, name, as_attachment=True)
+        else:
+            projpath1 = "./project/" + jsondata["name"]
+            projdir1 = (base_path / projpath1).resolve()
             print(jsondata)
-            os.mkdir("./project/" + jsondata["name"])
+            os.mkdir(projdir1)
             print("made dir")
-            f = open("./project/" + jsondata["name"] + "/" + jsondata["name"] + ".py", "w")
+            projpath2 = "./project/" + jsondata["name"] + "/" + jsondata["name"] + ".py"
+            projdir2 = (base_path / projpath2).resolve()
+
+            f = open(projdir2, "w")
             f.write(jsondata["content"])
             f.close()
             print("made filetorun")
-
-            f = open("./project/" + jsondata["name"] + "/desc.txt", "w")
+            projpath3 = "./project/" + jsondata["name"] + "/" + "desc.txt"
+            projdir3 = (base_path / projpath3).resolve()
+            f = open(projdir3, "w")
             f.write(jsondata["desc"])
             f.close()
             print("made desc")
