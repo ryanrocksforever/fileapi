@@ -75,7 +75,8 @@ def files():
         file_path = (base_path / "./project").resolve()
         folders = os.listdir(file_path)
         print(folders)
-        a = {}
+        a = {"projects": }
+        b = {}
 
         for i in folders:
             # num = i[0]
@@ -88,8 +89,9 @@ def files():
             f.close()
 
 
-            a.__setitem__(name, desciption)
+            b.__setitem__(name, desciption)
 
+        a = {"projects": b}
         return a
 
 
