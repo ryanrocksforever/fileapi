@@ -2,3 +2,4 @@ flask-api
 flask-cors
 flask
 gunicorn
+gitpython
