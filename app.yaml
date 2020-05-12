@@ -8,6 +8,3 @@ runtime_config:
 env_variables:
   CLOUD_STORAGE_BUCKET: <your-cloud-storage-bucket>
 
-libraries:
-  - name: ssl
-    version: latest

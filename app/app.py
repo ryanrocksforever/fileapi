@@ -101,7 +101,7 @@ def files():
 
 if __name__ == "__main__":
     context = ('server.crt', 'server.key')
-    app.run(threaded=False, debug=False)
+    app.run(host="0.0.0.0", port=80, ssl_context=context, threaded=False, debug=False)
 
 # https://github.com/jasbur/RaspiWiFi
 # that is link to wifi setup thing i use
@@ -109,4 +109,4 @@ if __name__ == "__main__":
 # sudo -E flask run --host=switch-hub.local --port=80 --cert=adhoc
 # sudo -E flask run --host=switch-hub.local --port=80 --cert=server.crt --key=server.key
 
-# export FLASK_APP=fl-app.py && sudo -E flask run --host=switch-hub.local --port=80 --cert=server.crt --key=server.key
+# export FLASK_APP=fl-app.py && sudo -E flask run --host=0.0.0.0 --port=80 --cert=server.crt --key=server.key
